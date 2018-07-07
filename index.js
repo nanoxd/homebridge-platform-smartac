@@ -82,14 +82,24 @@ class ThinkEcoAPI {
   async auth() {
     if (Date.now() - this.lastLogin > LOGIN_FREQUENCY) {
       this.log('api', 'logging in...');
+      await this.session.post({
+        uri: 'https://web.mymodlet.com/Account/Login?returnUrl=/devices',
+        body: JSON.stringify({
+          Email: this.username,
+          Password: this.password,
+        })
+      })
+      /*
       await this.session.post(
         {uri: 'https://web.mymodlet.com/Account/Login',
           form: {'loginForm.Email': this.username,
             'loginForm.Password': this.password,
             'loginForm.RememberMe': 'True',
-            'ReturnUrl': '/smartac'},
+            'ReturnUrl': '/Devices'},
           followRedirect: false,
           simple: false});
+      */
+      this.log('api', 'Logged in')
       this.lastLogin = Date.now();
     }
   }
