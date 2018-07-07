@@ -83,7 +83,7 @@ class ThinkEcoAPI {
     if (Date.now() - this.lastLogin > LOGIN_FREQUENCY) {
       this.log('api', 'logging in...');
       await this.session.post(
-        {uri: 'https://mymodlet.com/Account/Login',
+        {uri: 'https://web.mymodlet.com/Account/Login',
           form: {'loginForm.Email': this.username,
             'loginForm.Password': this.password,
             'loginForm.RememberMe': 'True',
