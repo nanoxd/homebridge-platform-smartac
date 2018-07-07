@@ -83,12 +83,13 @@ class ThinkEcoAPI {
     if (Date.now() - this.lastLogin > LOGIN_FREQUENCY) {
       this.log('api', 'logging in...');
       await this.session.post({
-        uri: 'https://web.mymodlet.com/Account/Login?returnUrl=/devices',
+        uri: 'https://web.mymodlet.com/Account/Login?returnUrl=/',
         body: {
           Email: this.username,
           Password: this.password,
         },
         json: true,
+        followRedirect: false,
       })
       /*
       await this.session.post(
@@ -118,7 +119,7 @@ class ThinkEcoAPI {
       this.log('api', 'updating thermostat status...');
       await this.auth();
       const statusTxt =
-       await this.session.post('https://mymodlet.com/SmartAC/UserSettingsTable');
+       await this.session.post('https://web.mymodlet.com/SmartAC/UserSettingsTable');
 
       // status is a quoted blob of HTML...
       const status = JSON.parse('{"response":' + statusTxt + '}');
