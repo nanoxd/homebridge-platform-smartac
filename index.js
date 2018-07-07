@@ -84,10 +84,11 @@ class ThinkEcoAPI {
       this.log('api', 'logging in...');
       await this.session.post({
         uri: 'https://web.mymodlet.com/Account/Login?returnUrl=/devices',
-        body: JSON.stringify({
+        body: {
           Email: this.username,
           Password: this.password,
-        })
+        },
+        json: true,
       })
       /*
       await this.session.post(
